@@ -1,7 +1,11 @@
 const express = require("express");
-
 const cors = require("cors");
+
 const Mainrouter = require("./Routes/user");
+
+
+app.use(cors());
+app.use(express.json());
 // const userRounter = require("./Rountes/user") same approach
 // app.use("api/v1",userRounter)
 const app =express();
@@ -18,11 +22,5 @@ app.use("/api/v1", Mainrouter)
 
 // const bcrypt = require('bcryptjs');
 // const jwt = require('jsonwebtoken');
-const mongoose =  require("mongoose");
 
-
-const Schema =mongoose.Aggregate.Schema;
-
-const userSchema = new Schema({
-
-})
+app.listen(3000);
