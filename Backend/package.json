@@ -1,0 +1,26 @@
+{
+  "name": "payment-app",
+  "version": "1.0.0",
+  "description": "this is payment app where user can make a transactions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git remote add origin https://github.com/Rishabh1-dubey/Payment-App.git"
+  },
+  "keywords": [
+    "Payment",
+    "app",
+    "money",
+    "trasaction"
+  ],
+  "author": "Rishabh Dubey",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "mongoose": "^8.6.3",
+    "zod": "^3.23.8"
+  }
+}
