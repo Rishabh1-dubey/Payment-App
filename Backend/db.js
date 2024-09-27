@@ -14,14 +14,29 @@ const userSchema = mongoose.Schema({
     maxLength: 30,
   },
   firstName: { type: String, required: true, trim: true, maxLength: 50 },
-  firstName: { type: String, required: true, trim: true, maxLength: 50 },
+  lastName: { type: String, required: true, trim: true, maxLength: 50 },
   password: { type: String, required: true, minLength: 7 },
 });
 
 
-const user = mongoose.model('User' , userSchema);
+//creating a account schema
+const accountSchema = new mongoose.Schema({
+  userId:{
+    type:mongoose.Schema.Types.ObjectId, //Reference to user model
+    ref:'User',
+    require:true
+  },
+  balance:{
+    type:Number,
+    require:true
+  }
+});
+
+const Account = mongoose.model("Account",  accountSchema)
+const User = mongoose.model('User' , userSchema);
+
 module.exports={
-    user
+  User,Account
 };
 
 
