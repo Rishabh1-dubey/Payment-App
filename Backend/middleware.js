@@ -1,13 +1,14 @@
-const {JWT_SECRET}  = require ("./config");
+const{ JWT_SECRET } = require ("./config");
 const jwt = require("jsonwebtoken");
 
 const authMiddleware =(req,res,next)=>{
     const authHeader= req.headers.authorization;
 
-    if(!authHeader || !authHeader.startsWith('Bearer')){
-        return res.status(403).json({});
+    if(!authHeader || !authHeader.startsWith('Bearer ')){
+        return res.status(403).json({message:"forbidden or Authorization header missing or invalid"});
     }
-const token = authHeader.split('')[1];
+const token = authHeader.split(' ')[1]; // notice to space here
+
 
 try{
     const decoded =jwt.verify(token, JWT_SECRET);
@@ -15,9 +16,7 @@ try{
 
     next()
 }catch(err){
-    return res.status(403).json({
-        message:"it's to overwhelming let's continue tomorrow"
-    })
+    return res.status(403).json({})
 }
 
 }

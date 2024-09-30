@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const zod = require("zod");
 const { User, Account } = require("../db");
-const { JWT_SECRET } = require("../config");
+const  {JWT_SECRET } = require("../config");
 const jwt = require("jsonwebtoken");
 //middlware
 const { authMiddleware } = require("../middleware");
@@ -10,38 +10,40 @@ const { authMiddleware } = require("../middleware");
 const signUpSchema = zod.object({
   username: zod.string().email(),
   firstName: zod.string(),
-  password: zod.string(),
-  lastname: zod.string(),
+  lastName: zod.string(),
   password: zod.string(),
 });
 
 router.post("/signup", async  (req, res) =>{
-  const body = req.body;
-  const { success } = signUpSchema.safeParse(req.body);
+
+  console.log(req.body);
+  const { success , error } = signUpSchema.safeParse(req.body);
 
   if (!success) {
-    return res.json({
-      message: "Email is already taken / Icorrect input",
+    return res.status(400).json({
+      message: "Incorrect input",
+      errors: error.issues,
     });
   }
 
   const existingUser = await User.findOne({
-    username: req.body.username,
+    username: req.body.username
   });
 
   if (existingUser) {
-    return res.status(411).json({
+    return res.status(409).json({
       message: "Email already taken/Incorrect inputs",
     });
   }
   const user = await User.create({
     username: req.body.username,
-    password: req.body.password,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
+    password: req.body.password,
   });
   const userId = user._id;
 
+  //--------- Create a New Account -------------- ///
   await Account.create({
     userId,
     balance: 1 + Math.random() * 10000,
@@ -59,6 +61,8 @@ router.post("/signup", async  (req, res) =>{
     token: token,
   });
 });
+
+// ---------  signIN schema  ------------------
 
 const signInSchema = zod.object({
   username: zod.string().email(),
@@ -91,7 +95,7 @@ router.post("/signin", async  (req, res)=> {
     },
     JWT_SECRET
   );
-  res.json({
+  res.status(411).json({
     message: "User created successfully",
     token: token,
   });
@@ -122,16 +126,16 @@ router.put("/", authMiddleware, async (req, res) => {
 router.get("/bulk", async (req, res) => {
   const filter = req.query.filter || "";
 
-  const users = await User.findOne({
+  const users = await User.find({
     $or: [
       {
         firstName: {
-          $regex: filter,
+          "$regex": filter,
         },
       },
       {
         lastName: {
-          $regex: filter,
+          "$regex": filter,
         },
       },
     ],
