@@ -1,3 +1,3 @@
 export function Heading({label}) {
-return  <div className="border border-red-300 font-bold text-4xl text-center">{label}</div>;
+return  <div className=" font-bold text-4xl text-center pt-4">{label}</div>;
 }
