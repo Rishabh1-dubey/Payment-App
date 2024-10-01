@@ -48,14 +48,18 @@ const Signup = () => {
           />
           <div className="pt-5 m-2">
             <ButtonSignIn
-              onClick={() => {
-                axios.post("http://localhost:3000/api/v1/user/signup",
+              onClick={async() => {
+                const responese =  await axios.post(
+                  "http://localhost:3000/api/v1/user/signup",
                   {
                     firstName,
                     lastName,
                     username,
                     password,
-                  });
+                  }
+                );
+
+                localStorage.setItem("token", responese.data.token);
               }}
               label={"Sign up"}
             />
