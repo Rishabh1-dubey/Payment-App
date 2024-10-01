@@ -5,7 +5,7 @@ export function Bottom({label, buttonText, to}) {
       <div>
         {label}
       </div>
-      <Link className="pointer underline pl-1 cursor-pointer" to={to}>
+      <Link  className="pointer underline pl-1 hover:cursor-pointer" to={to}>
         {buttonText}
       </Link>
     </div>
