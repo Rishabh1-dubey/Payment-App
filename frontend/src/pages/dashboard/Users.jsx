@@ -4,11 +4,12 @@ import axios from "axios";
 
 const Users = () => {
   const [user, setuser] = useState([]);
+  const[filter, setfilter] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/v1/user/bulk").then((response) => {
+    axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter).then((response) => {
       setuser(response.data.user);
-    });
+    },[filter]);
   });
   return (
     <>
@@ -16,6 +17,7 @@ const Users = () => {
       <div>
         <div className=" my-3 ">
           <input
+          onChange={(e)=>{setfilter(e.target.value)}}
             type="text"
             placeholder="Search...."
             className="w-full px-2 py-1 ml-3 border rounded border-slate-200"

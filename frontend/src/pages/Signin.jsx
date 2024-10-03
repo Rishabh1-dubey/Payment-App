@@ -15,7 +15,7 @@ const Signin = () => {
           <Input label={"Email"} placeholder={"Ram1008@gmail.com"} />
           <Input label={"FirstName"} placeholder={" 12345678"} />
           <div className="pt-5 m-2">
-            <ButtonSignIn label={"Sign up"} />
+            <ButtonSignIn label={"Sign in"} />
           </div>
         </div>
       </div>
