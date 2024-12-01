@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect('mongodb://127.0.0.1:27017/paytm');
+mongoose.connect('mongodb+srv://renio067778:5yNQqAwz95f46UbG@cluster0.gpp6k.mongodb.net/paytm');
 
 const userSchema = mongoose.Schema({
   //--------------------- self pratice  by name ---------------------
@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true,
     trim: true,
-    lowercase: true,
+    lowercase: true,  
     minLength: 3,
     maxLength: 30,
   },
