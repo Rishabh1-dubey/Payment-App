@@ -1,15 +1,18 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { ButtonSignIn } from "../../components/ButtonSignIn";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Users = () => {
   const [user, setuser] = useState([]);
-  const[filter, setfilter] = useState("");
+  const [filter, setfilter] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter).then((response) => {
-      setuser(response.data.user);
-    },[filter]);
+    axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter).then(
+      response=> {
+        setuser(response.data.user);
+      },[filter]
+    )
   });
   return (
     <>
@@ -17,7 +20,9 @@ const Users = () => {
       <div>
         <div className=" my-3 ">
           <input
-          onChange={(e)=>{setfilter(e.target.value)}}
+            onChange={(e) => {
+              setfilter(e.target.value);
+            }}
             type="text"
             placeholder="Search...."
             className="w-full px-2 py-1 ml-3 border rounded border-slate-200"
@@ -36,6 +41,7 @@ const Users = () => {
 export default Users;
 
 export function User({ user }) {
+  const navigate= useNavigate()
   return (
     <div className="  flex justify-between  ml-6">
       <div className="flex">
@@ -43,8 +49,8 @@ export function User({ user }) {
           <div className="flex flex-col justify-center h-full text-xl">
             {user.firstName[0]}
           </div>
-          </div>
-          <div className="flex flex-col justify-center h-ful">
+        </div>
+        <div className="flex flex-col justify-center h-ful">
           <div>
             {user.firstName} {user.lastName}
           </div>
@@ -52,7 +58,7 @@ export function User({ user }) {
       </div>
 
       <div className="flex flex-col justify-center mr-10">
-        <ButtonSignIn label={"Send Money"} />
+        <ButtonSignIn onClick={(e)=>{navigate("/send?id=" + user._id +"&name="+user.firstName)}} label={"Send Money"} />
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { Input } from "../components/Input";
 import { ButtonSignIn } from "../components/ButtonSignIn";
 import { Bottom } from "../components/Bottom";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [firstName, setfirstName] = useState("");
@@ -45,7 +45,7 @@ const Signup = () => {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-            label={"firstName"}
+            label={"Password"}
             placeholder={" 12345678"}
           />
           <div className="pt-5 m-2">
@@ -54,13 +54,14 @@ const Signup = () => {
                 const responese =  await axios.post(
                   "http://localhost:3000/api/v1/user/signup",
                   {
+                    username,
                     firstName,
                     lastName,
-                    username,
-                    password,
+                    password
                   }
                 );
 
+                
                 localStorage.setItem("token", responese.data.token);
                 navigate("/dashboard")
               }}
