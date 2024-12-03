@@ -36,8 +36,8 @@ const Users = () => {
         </div>
       </div>
       <div>
-        {user.map((user) => (
-          <User user={user} />
+        {user.map((user,id) => (
+          <User key={id} user={user} />
         ))}
       </div>
     </>

@@ -17,6 +17,7 @@ const Dashboard = () => {
           },
         }
       );
+     
       setBalance(res.data.balance);
     };
     fetchBalance();

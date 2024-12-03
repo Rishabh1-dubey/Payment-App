@@ -15,6 +15,7 @@ const Signup = () => {
   const navigate = useNavigate();
   return (
     <div className="bg-slate-200 h-screen flex justify-center">
+            <div  className="absolute bottom-[620px] leading-tight  text-6xl font-bold ml-4"><span className="text-orange-500">Pay{""}</span><span className="text-blue-600">Easy</span> </div>
       <br></br>
       <div className="flex flex-col justify-center">
         <div className="rounded-lg bg-white w-80 text-center p-2 h-max- px-4">

@@ -81,7 +81,7 @@ const Send = () => {
                     }
                   } catch (error) {
                     console.error("Error during transfer:", error);
-                    alert("Payment failed. Please try again.");
+                    swal ( "Oops" ,  "Something went wrong!" ,  "error" )
                   }
                 }}
                 class="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 mx-auto ml-20  bg-green-500 text-white"
