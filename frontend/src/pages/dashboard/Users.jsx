@@ -8,17 +8,23 @@ const Users = () => {
   const [filter, setfilter] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter).then(
-      response=> {
+    // Fetch users only when 'filter' changes
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/v1/user/bulk?filter=${filter}`);
         setuser(response.data.user);
-      },[filter]
-    )
-  });
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, [filter]); // Runs only when filter changes
   return (
     <>
-      <div className="font-bold mt-6 ml-2"> Users</div>
+      <div className="font-bold mt-6  ml-12"> Users</div>
       <div>
-        <div className=" my-3 ">
+        <div className=" my-3 w-[400px] ml-4 ">
           <input
             onChange={(e) => {
               setfilter(e.target.value);

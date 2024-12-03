@@ -5,6 +5,7 @@ import Users from "./dashboard/Users";
 import axios from "axios";
 
 const Dashboard = () => {
+  
   const [balance, setBalance] = useState(0);
   useEffect(() => {
     const fetchBalance = async () => {
@@ -12,7 +13,7 @@ const Dashboard = () => {
         "http://localhost:3000/api/v1/account/balance",
         {
           headers: {
-            Authorization: "Bearer" + localStorage.getItem("token  "),
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
         }
       );
@@ -22,7 +23,7 @@ const Dashboard = () => {
   }, [balance]);
 
   return (
-    <div className="">
+    <div className="h-full">
       <Appbar />
       <Balance balance={"Your Balance is"} rs={balance} />
       <Users />
