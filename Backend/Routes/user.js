@@ -69,36 +69,53 @@ const signInSchema = zod.object({
   password: zod.string(),
 });
 router.post("/signin", async  (req, res)=> {
-  const body = req.body;
+  // const body = req.body;
   const { success } = signInSchema.safeParse(req.body);
 
   if (!success) {
     return res.status(411).json({
-      message: " Icorrect input",
+      message: " Incorrect input",
     });
   }
 
   const user = await User.findOne({
-    username: body.username,
+    username: req.body.username,
+    password:req.body.password
   });
 
-  if (user._id) {
-    return res.json({
-      message: "email is already taken / Incorrect Input",
-    });
-  }
+  //this is my code
+  // if (user._id) {
+  //   return res.json({
+  //     message: "email is already taken / Incorrect Input",
+  //   });
+  // }
 
-  const dbUser = await User.create(body);
-  const token = jwt.sign(
-    {
-      userId: dbUser._id,
-    },
-    JWT_SECRET
-  );
+  // const dbUser = await User.create(body);
+  // const token = jwt.sign(
+  //   {
+  //     userId: dbUser._id,
+  //   },
+  //   JWT_SECRET
+  // );
+
+
+// TA Summna code
+  if (user) {
+    const token = jwt.sign({
+        userId: user._id
+    }, JWT_SECRET);
+
+    res.json({
+        token: token
+    })
+    return;
+      }
+
+
   res.status(411).json({
     message: "User created successfully",
     token: token,
-  });
+         });
 });
 
 //userUpdate routes
