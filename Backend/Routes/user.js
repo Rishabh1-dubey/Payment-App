@@ -83,7 +83,7 @@ router.post("/signin", async  (req, res)=> {
     password:req.body.password
   });
 
-  //this is my code
+  // this is my code
   // if (user._id) {
   //   return res.json({
   //     message: "email is already taken / Incorrect Input",
@@ -95,11 +95,11 @@ router.post("/signin", async  (req, res)=> {
   //   {
   //     userId: dbUser._id,
   //   },
-  //   JWT_SECRET
+  //   JWT_SECRET 
   // );
 
 
-// TA Summna code
+// TA Summna code that help to run my output
   if (user) {
     const token = jwt.sign({
         userId: user._id
