@@ -109,14 +109,14 @@ router.post("/signin", async  (req, res)=> {
         token: token
     })
     return;
-      }
-
-
-  res.status(411).json({
-    message: "User created successfully",
-    token: token,
-         });
-});
+    
+  }
+    
+    return res.status(411).json({
+      message: "User created successfully",
+      token,
+    });
+  });
 
 //userUpdate routes
 const updateBody = zod.object({
