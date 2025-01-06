@@ -70,7 +70,9 @@ const signInSchema = zod.object({
 });
 router.post("/signin", async  (req, res)=> {
   // const body = req.body;
+
   const { success } = signInSchema.safeParse(req.body);
+
 
   if (!success) {
     return res.status(411).json({
@@ -109,14 +111,13 @@ router.post("/signin", async  (req, res)=> {
         token: token
     })
     return;
-    
-  }
-    
+      }
+      
     return res.status(411).json({
-      message: "User created successfully",
-      token,
-    });
-  });
+    message: "User created successfully",
+     token,
+         });
+});
 
 //userUpdate routes
 const updateBody = zod.object({
