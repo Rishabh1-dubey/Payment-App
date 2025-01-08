@@ -16,7 +16,7 @@ const signUpSchema = zod.object({
 
 router.post("/signup", async  (req, res) =>{
 
-  console.log(req.body);
+  // console.log(req.body);
   const { success , error } = signUpSchema.safeParse(req.body);
 
   if (!success) {
@@ -59,6 +59,7 @@ router.post("/signup", async  (req, res) =>{
   res.json({
     message: "User created successfully",
     token: token,
+    user
   });
 });
 
@@ -108,15 +109,16 @@ router.post("/signin", async  (req, res)=> {
     }, JWT_SECRET);
 
     res.json({
-        token: token
+        token: token,
+        message: `Welcome back ${user.username} `,
+        user,
+        success:true
     })
     return;
       }
       
-    return res.status(411).json({
-    message: "User created successfully",
-     token,
-         });
+    res.status(411).json({
+    message: "Error while logging in" });
 });
 
 //userUpdate routes
