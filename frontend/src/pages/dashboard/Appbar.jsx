@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { IMG_LOGO } from "../../constent";
+import { useSelector } from "react-redux";
+import store from "../../redux/store";
 
 
-export function Appbar({ user }) {
+export function Appbar() {
+
+const user = useSelector(store => store.app.user);
+
+
   return (
     <div className="shadow-md h-16 flex justify-between mt-2  ">
       <div className="flex flex-col justify-center h-full ml-4">
@@ -18,9 +24,9 @@ export function Appbar({ user }) {
         </button>
           <div className="flex flex-col justify-center h-full mr-4  pb-2">Hello</div>
         </div>
-        <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1  mr-4">
-          <div className="flex flex-col justify-center h-full text-xl ">
-            <div>U</div>
+        <div className="rounded-full h-12 w-12 bg-green-300 flex justify-center mt-1  mr-4">
+          <div className="flex flex-col justify-center h-full text-xl text-center ">
+            <div>{user?.firstName[0] || "U"}</div>
           </div>
         </div>
       </div>

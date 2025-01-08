@@ -11,7 +11,7 @@ const Users = () => {
     // Fetch users only when 'filter' changes
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/v1/user/bulk?filter=${filter}`);
+        const response = await axios.get(`http://localhost:3001/api/v1/user/bulk?filter=${filter}`);
         setuser(response.data.user);
       } catch (error) {
         console.error("Error fetching users:", error);
