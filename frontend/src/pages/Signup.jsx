@@ -53,7 +53,7 @@ const Signup = () => {
             <ButtonSignIn
               onClick={async() => {
                 const responese =  await axios.post(
-                  "http://localhost:3000/api/v1/user/signup",
+                  "http://localhost:3001/api/v1/user/signup",
                   {
                     username,
                     firstName,

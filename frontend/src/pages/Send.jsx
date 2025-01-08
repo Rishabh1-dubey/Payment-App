@@ -45,7 +45,7 @@ const Send = () => {
                 onClick={async () => {
                   try {
                     const responese = await axios.post(
-                      "http://localhost:3000/api/v1/account/transfer",
+                      "http://localhost:3001/api/v1/account/transfer",
                       {
                         to: id,
                         amount,
